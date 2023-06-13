@@ -10,15 +10,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import Box from '@mui/system/Box';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
-import Checkbox from '@mui/material/Checkbox/Checkbox';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import IconButton from '@mui/material/IconButton';
 import { useDeepCompareEffect } from '@fuse/hooks';
-import TaskPrioritySelector from './TaskPrioritySelector';
-import FormActionsMenu from './FormActionsMenu';
 import { addTask, getTask, newTask, selectTask, updateTask } from '../store/taskSlice';
 import { selectTags } from '../store/tagsSlice';
 import ProjectDropdown from './ProjectDropdown';
@@ -91,10 +85,9 @@ function TaskForm(props) {
 
   return (
     <>
-      <div className="relative flex flex-col flex-auto items-center px-24 sm:px-48">
+      <div className="relative flex flex-col justify-start px-24 sm:px-48">
         <div className="flex items-center justify-between border-b-1 w-full py-24 mt-16 mb-32">
           <div className="flex items-center justify-end">
-            {routeParams.id !== 'new' && <FormActionsMenu taskId={task.id} />}
             <IconButton className="" component={NavLinkAdapter} to="/tasks" size="large">
               <FuseSvgIcon>heroicons-outline:x</FuseSvgIcon>
             </IconButton>
@@ -108,7 +101,7 @@ function TaskForm(props) {
           name="tags"
           render={({ field: { onChange, value } }) => <ProjectDropdown />}
         />
-        <div className="flex w-full space-x-16 mt-32 mb-16 items-center">
+        <div className="flex space-x-16 mt-32 mb-16 items-center">
           <Controller
             control={control}
             name="startTime"
@@ -135,6 +128,34 @@ function TaskForm(props) {
             )}
           />
         </div>
+
+        <div className="flex space-x-16 mt-32 mb-16 items-center">
+          <Controller
+            control={control}
+            name="endTime"
+            render={({ field: { value, onChange } }) => (
+              <DateTimePicker
+                className="w-full"
+                value={new Date(value)}
+                onChange={onChange}
+                clearable
+                slotProps={{
+                  textField: {
+                    id: 'end-date',
+                    label: 'End date/time',
+                    InputLabelProps: {
+                      shrink: true,
+                    },
+                    fullWidth: true,
+                  },
+                  actionBar: {
+                    actions: ['clear', 'today'],
+                  },
+                }}
+              />
+            )}
+          />
+        </div>
       </div>
       {routeParams.id === 'new' && (
         <Box
@@ -148,7 +169,6 @@ function TaskForm(props) {
             className="ml-8"
             variant="contained"
             color="secondary"
-            disabled={_.isEmpty(dirtyFields) || !isValid}
             onClick={handleSubmit(onSubmitNew)}
           >
             Create

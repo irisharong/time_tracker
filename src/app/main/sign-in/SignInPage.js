@@ -39,7 +39,7 @@ function SignInPage() {
 
   useEffect(() => {
     setValue('email', 'user@test.com', { shouldDirty: true, shouldValidate: true });
-    setValue('password', 'test', { shouldDirty: true, shouldValidate: true });
+    setValue('password', 'admin', { shouldDirty: true, shouldValidate: true });
   }, [setValue]);
 
   function onSubmit({ email, password }) {

@@ -1,13 +1,10 @@
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import ProjectDropdown from './task/ProjectDropdown';
 import { selectRemainingTasks } from './store/tasksSlice';
-import StopWatch from './task/Stopwatch';
 
 function TasksHeader(props) {
   const remainingTasks = useSelector(selectRemainingTasks);

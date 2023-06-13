@@ -1,6 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import List from '@mui/material/List';
 import { reorderList, selectTasks } from './store/tasksSlice';
 import TaskListItem from './TaskListItem';
