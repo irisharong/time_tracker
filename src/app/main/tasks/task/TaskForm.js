@@ -22,6 +22,7 @@ import FormActionsMenu from './FormActionsMenu';
 import { addTask, getTask, newTask, selectTask, updateTask } from '../store/taskSlice';
 import { selectTags } from '../store/tagsSlice';
 import ProjectDropdown from './ProjectDropdown';
+import TaskInput from './TaskInput';
 
 /**
  * Form Validation Schema
@@ -92,7 +93,7 @@ function TaskForm(props) {
     <>
       <div className="relative flex flex-col flex-auto items-center px-24 sm:px-48">
         <div className="flex items-center justify-between border-b-1 w-full py-24 mt-16 mb-32">
-          <div className="flex items-center">
+          <div className="flex items-center justify-end">
             {routeParams.id !== 'new' && <FormActionsMenu taskId={task.id} />}
             <IconButton className="" component={NavLinkAdapter} to="/tasks" size="large">
               <FuseSvgIcon>heroicons-outline:x</FuseSvgIcon>
@@ -100,26 +101,7 @@ function TaskForm(props) {
           </div>
         </div>
 
-        <Controller
-          control={control}
-          name="task"
-          render={({ field }) => (
-            <TextField
-              className="mt-32 max-h-auto"
-              {...field}
-              label={`${_.upperFirst(form.type)} task`}
-              placeholder="Task"
-              id="task"
-              error={!!errors.title}
-              helperText={errors?.task?.message}
-              variant="outlined"
-              fullWidth
-              multiline
-              minRows={3}
-              maxRows={10}
-            />
-          )}
-        />
+        <Controller control={control} name="task" render={({ field }) => <TaskInput />} />
 
         <Controller
           control={control}
@@ -129,13 +111,7 @@ function TaskForm(props) {
         <div className="flex w-full space-x-16 mt-32 mb-16 items-center">
           <Controller
             control={control}
-            name="priority"
-            render={({ field }) => <TaskPrioritySelector {...field} />}
-          />
-
-          <Controller
-            control={control}
-            name="dueDate"
+            name="startTime"
             render={({ field: { value, onChange } }) => (
               <DateTimePicker
                 className="w-full"
@@ -145,12 +121,11 @@ function TaskForm(props) {
                 slotProps={{
                   textField: {
                     id: 'due-date',
-                    label: 'Due date',
+                    label: 'Start date/time',
                     InputLabelProps: {
                       shrink: true,
                     },
                     fullWidth: true,
-                    variant: 'outlined',
                   },
                   actionBar: {
                     actions: ['clear', 'today'],
@@ -160,7 +135,6 @@ function TaskForm(props) {
             )}
           />
         </div>
-
       </div>
       {routeParams.id === 'new' && (
         <Box

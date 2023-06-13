@@ -36,7 +36,6 @@ function NavbarStyle1Content(props) {
   return (
     <Root className={clsx('flex flex-auto flex-col overflow-hidden h-full', props.className)}>
       <div className="flex flex-row items-center shrink-0 h-48 md:h-72 px-20">
-
         <NavbarToggleButton className="w-40 h-40 p-0" />
       </div>
 
@@ -44,9 +43,7 @@ function NavbarStyle1Content(props) {
         className="flex flex-1 flex-col min-h-0"
         option={{ suppressScrollX: true, wheelPropagation: false }}
       >
-
         <Navigation layout="vertical" />
-
       </StyledContent>
     </Root>
   );

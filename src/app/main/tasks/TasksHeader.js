@@ -24,16 +24,6 @@ function TasksHeader(props) {
         >
           Time Tracker
         </Typography>
-        <Typography
-          component={motion.span}
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-          delay={500}
-          className="text-14 font-medium ml-2"
-          color="text.secondary"
-        >
-          100 total hours
-        </Typography>
       </div>
 
       <div className="flex items-center -mx-8">

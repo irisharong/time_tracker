@@ -6,6 +6,7 @@ import { reorderList, selectTasks } from './store/tasksSlice';
 import TaskListItem from './TaskListItem';
 import ProjectDropdown from './task/ProjectDropdown';
 import StopWatch from './task/Stopwatch';
+import TaskInput from './task/TaskInput';
 
 function TasksList(props) {
   const dispatch = useDispatch();
@@ -35,13 +36,7 @@ function TasksList(props) {
   return (
     <div className=" justify-between">
       <div className="flex-col sm:flex-row item-center sm:items-end space-y-16 sm:space-y-0 p-24 sm:p-32 w-full border-b-1 flex justify-between">
-        <TextField
-          className="mr-16"
-          id="task-entry"
-          label="What are you doing?"
-          variant="standard"
-          sx={{ width: 300 }}
-        />
+        <TaskInput />
         <ProjectDropdown />
         <StopWatch />
       </div>
