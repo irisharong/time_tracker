@@ -7,16 +7,9 @@ import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectFuseCurrentLayoutConfig, selectToolbarTheme } from 'app/store/fuse/settingsSlice';
 import { selectFuseNavbar } from 'app/store/fuse/navbarSlice';
-import AdjustFontSize from '../../shared-components/AdjustFontSize';
-import FullScreenToggle from '../../shared-components/FullScreenToggle';
-import LanguageSwitcher from '../../shared-components/LanguageSwitcher';
-import NotificationPanelToggleButton from '../../shared-components/notificationPanel/NotificationPanelToggleButton';
-import NavigationShortcuts from '../../shared-components/NavigationShortcuts';
-import NavigationSearch from '../../shared-components/NavigationSearch';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import NavbarToggleButton from '../../shared-components/NavbarToggleButton';
-import UserMenu from '../../shared-components/UserMenu';
-import QuickPanelToggleButton from '../../shared-components/quickPanel/QuickPanelToggleButton';
-import ChatPanelToggleButton from '../../shared-components/chatPanel/ChatPanelToggleButton';
 
 function ToolbarLayout1(props) {
   const config = useSelector(selectFuseCurrentLayoutConfig);
@@ -58,29 +51,19 @@ function ToolbarLayout1(props) {
               </>
             )}
 
-            <Hidden lgDown>
-              <NavigationShortcuts />
-            </Hidden>
           </div>
 
           <div className="flex items-center px-8 h-full overflow-x-auto">
-            <LanguageSwitcher />
-
-            <AdjustFontSize />
-
-            <FullScreenToggle />
-
-            <NavigationSearch />
-
-            <Hidden lgUp>
-              <ChatPanelToggleButton />
-            </Hidden>
-
-            <QuickPanelToggleButton />
-
-            <NotificationPanelToggleButton />
-
-            <UserMenu />
+            <Button
+              color="primary"
+              className=" w-full mt-16"
+              aria-label="Sign out"
+              component={Link}
+              to="/sign-out"
+              size="large"
+            >
+              Sign Out
+            </Button>
           </div>
 
           {config.navbar.display && config.navbar.position === 'right' && (
